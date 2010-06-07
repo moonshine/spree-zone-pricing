@@ -1,0 +1,16 @@
+<table class="index">
+  <tr>
+    <th><%= t("zone") %></th>
+    <th><%= t("price") %></th>
+  </tr>
+  <% for zone in Zone.all %>
+    <tr>
+      <td>
+        <%= zone.name %>
+      </td>
+      <td>
+        <%= text_field_tag "product[zone_ids][]", zone.zone_prices.find_by_zoneable_id(@product.id).try(:price) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
