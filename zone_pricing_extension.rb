@@ -17,11 +17,11 @@ class ZonePricingExtension < Spree::Extension
     # Add additional associations to allow m:m relationship
     # between zones<->products/variants
     Zone.send(:include, Spree::ZonePricing::Zone)
-    Product.send(:include, Spree::ZonePricing::Product)
-    Variant.send(:include, Spree::ZonePricing::Variant)
+    Product.send(:include, Spree::ZonePricing::Zoneable)
+    Variant.send(:include, Spree::ZonePricing::Zoneable)
 
     # Override controller methods
-    Admin::VariantsController.send(:include, Spree::SharedAssets::Admin::VariantsController)
+    #Admin::VariantsController.send(:include, Spree::SharedAssets::Admin::VariantsController)
 
   end
 end

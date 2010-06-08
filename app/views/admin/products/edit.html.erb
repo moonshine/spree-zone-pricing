@@ -4,7 +4,7 @@
 
 <% form_for(@product, :url => object_url, :html => { :method => :put, :multipart => true }) do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
-  <%= render 'zone_prices' %>
+  <%= render :partial => 'admin/shared/zone_prices', :locals => {:zoneable => @product} %>
   <%= render :partial => 'admin/shared/edit_resource_links' %>
 <% end %>
 

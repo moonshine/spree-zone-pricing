@@ -41,6 +41,8 @@ class ZonePricingHooks < Spree::ThemeSupport::HookListener
   #
 
   # Add zone price table to the admin form
-  insert_after :admin_variant_edit_form, 'zone_prices'
+  insert_after :admin_variant_edit_form do
+      "<%= render :partial => 'admin/shared/zone_prices', :locals => {:zoneable => @variant} %>"
+  end
 
 end

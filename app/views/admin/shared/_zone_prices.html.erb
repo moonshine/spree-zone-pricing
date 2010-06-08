@@ -9,7 +9,7 @@
         <%= zone.name %>
       </td>
       <td>
-        <%= text_field_tag "variant[zone_prices_attributes][#{zone.id}][price]", zone.zone_prices.find_by_zoneable_id(@variant.id).try(:price) %>
+        <%= text_field_tag "#{zoneable.class.name.downcase}[zone_prices_attributes][#{zone.id}][price]", zone.zone_prices.find_by_zoneable_id(zoneable.id).try(:price) %>
       </td>
     </tr>
   <% end %>
