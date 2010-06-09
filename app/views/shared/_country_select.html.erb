@@ -1,0 +1,7 @@
+<% form_tag :controller => 'countries', :action => 'set' do %>
+  <%= label_tag t('country')  %>
+  <%= select_tag 'id',
+    options_for_select(Country.order_by_name.collect{ |c| [c.name, c.id] }, get_user_country),
+     :onchange => "this.form.submit();" %>
+  <%= content_tag(:noscript, link_to(t('change'), :controller => 'countries', :action => 'set')) %>
+<% end %>

@@ -14,14 +14,20 @@ class ZonePricingExtension < Spree::Extension
   
   def activate
 
+    # Add helper to retrieve the users country
+    ApplicationHelper.send(:include, Spree::ZonePricing::ApplicationHelper)
+
     # Add additional associations to allow m:m relationship
     # between zones<->products/variants
     Zone.send(:include, Spree::ZonePricing::Zone)
     Product.send(:include, Spree::ZonePricing::Zoneable)
     Variant.send(:include, Spree::ZonePricing::Zoneable)
 
-    # Override controller methods
-    #Admin::VariantsController.send(:include, Spree::SharedAssets::Admin::VariantsController)
+    # Override catalog price
+    ProductsHelper.send(:include, Spree::ZonePricing::ProductsHelper)
+
+    # Add action to countries controller to handle country selection
+    CountriesController.send(:include, Spree::ZonePricing::CountriesController)
 
   end
 end
