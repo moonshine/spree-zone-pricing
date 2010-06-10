@@ -7,8 +7,8 @@ module Spree::ZonePricing::GetCountry
         country = session[:country] if session.has_key?(:country)
         # If no country in session, check if user has a bill address, if so use
         # the country from the address
-        country ||= (current_user && current_user.respond_to?('bill_address') &&
-          current_user.bill_address) ? current_user.bill_address.country.id : nil
+        country ||= (current_user && current_user.respond_to?('ship_address') &&
+          current_user.ship_address) ? current_user.ship_address.country.id : nil
         # If no bill address country use default country
         country ||= Spree::Config[:default_country_id]
       end

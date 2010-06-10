@@ -39,6 +39,13 @@ module Spree::ZonePricing::Variant
         end
       end
 
+      # Method to default variant zone prices to the product zone prices
+      def set_default_zone_prices(country_id)
+        return if self.product.master.zone_prices.size <= 0 # No zone prices specified for product
+        # Assign product zone prices as defaults
+        self.product.master.zone_prices.each {|zp| self.zone_prices.build(zp.attributes)}
+      end
+
     end
   end
 

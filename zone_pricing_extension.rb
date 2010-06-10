@@ -25,16 +25,18 @@ class ZonePricingExtension < Spree::Extension
     # Override add_variant method so that we can use zone pricing
     Order.send(:include, Spree::ZonePricing::Order)
 
-    # Override catalog price
+    # Override price
     ProductsHelper.send(:include, Spree::ZonePricing::ProductsHelper)
 
     # Add action to countries controller to handle country selection
     CountriesController.send(:include, Spree::ZonePricing::CountriesController)
-
+    # Add code to set the currently country in the order
     OrdersController.send(:include, Spree::ZonePricing::OrdersController)
     # Add helper to retrieve the users country
     OrdersController.send(:include, Spree::ZonePricing::GetCountry)
-
+    # Add helper to retrieve the users country
+    Admin::VariantsController.send(:include, Spree::ZonePricing::GetCountry)
+    # Add code to save zone prices
     Admin::VariantsController.send(:include, Spree::ZonePricing::Admin::VariantsController)
 
   end
