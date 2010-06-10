@@ -1,16 +1,20 @@
 <table class="index">
-  <tr>
-    <th><%= t("zone") %></th>
-    <th><%= t("price") %></th>
-  </tr>
-  <% for zone in Zone.all %>
+  <thead>
     <tr>
-      <td>
-        <%= zone.name %>
-      </td>
-      <td>
-        <%= text_field_tag "#{zoneable.class.name.downcase}[zone_prices_attributes][#{zone.id}][price]", zone.zone_prices.find_by_zoneable_id(zoneable.id).try(:price) %>
-      </td>
+      <th><%= t("zone") %></th>
+      <th><%= t("price") %></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody id="zone_prices">
+    <% for zone in Zone.all %>
+      <tr>
+        <td>
+          <%= zone.name %>
+        </td>
+        <td>
+          <%= text_field_tag "variant[zone_price_attributes][#{zone.id}][price]", zone.zone_prices.find_by_variant_id(@variant.id).try(:price) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
