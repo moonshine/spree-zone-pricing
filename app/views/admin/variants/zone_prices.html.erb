@@ -1,0 +1,34 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => t("zone_pricing")} %>
+
+<%= error_messages_for :variant %>
+
+<% form_for(:variant, :url => admin_product_variant_url(@product, @variant), :html => { :method => :put }) do |f| %>
+
+  <h3><%= t("zone_pricing") %></h3>
+  <table class="index">
+    <thead>
+      <tr>
+        <th><%= t("zone") %></th>
+        <th><%= t("price") %></th>
+      </tr>
+    </thead>
+    <tbody id="zone_prices">
+      <% for zone in Zone.all %>
+        <tr>
+          <td>
+            <%= zone.name %>
+          </td>
+          <td>
+            <%= text_field_tag "variant[zone_price_attributes][#{zone.id}][price]", zone.zone_prices.find_by_variant_id(@variant.id).try(:price) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br/><br/>
+
+  <%= render :partial => 'admin/shared/edit_resource_links' %>
+<% end %>
+

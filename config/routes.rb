@@ -1,5 +1,5 @@
-# Put your extension routes here.
-
-# map.namespace :admin do |admin|
-#   admin.resources :whatever
-# end  
+map.namespace :admin do |admin|
+   admin.resources :products do |product|
+     product.resources :variants, :member => {:zone_prices => :get}
+   end
+end
