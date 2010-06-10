@@ -13,15 +13,13 @@ module Spree::ZonePricing::ProductsHelper
     options.assert_valid_keys(:format_as_currency, :show_vat_text)
     options.reverse_merge! :format_as_currency => true, :show_vat_text => Spree::Config[:show_price_inc_vat]
 
-    # Check if zone prices set
-    #if product_or_variant.zone_prices.find_by_zone_id()
-
-    #else
-      # No zone prices set use variant/product price
+    # Get the zone price for this variant/product if one is defined
+    # otherwise use the normal price
+    if product_or_variant.respond_to?(:zone_price)
+      amount = product_or_variant.zone_price(get_user_country_id)
+    else
       amount = product_or_variant.price
-    #end
-
-
+    end
 
     amount += Calculator::Vat.calculate_tax_on(product_or_variant) if Spree::Config[:show_price_inc_vat]
     options.delete(:format_as_currency) ? format_price(amount, options) : ("%0.2f" % amount).to_f

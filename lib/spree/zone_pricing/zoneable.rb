@@ -25,6 +25,20 @@ module Spree::ZonePricing::Zoneable
           end
         end
       end
+
+      # Return zone price if defined otherwise return normal price
+      def zone_price(country_id)
+        # Find zone and check if zone price set for the product/variant
+        zone = Country.find(country_id).zone
+        zone_price = self.zone_prices.find_by_zone_id(zone.id) if zone && self.respond_to?('zone_prices')
+        if zone_price
+          # Zone price set us it
+          amount = zone_price.price
+        else
+          amount = self.price
+        end
+      end
+
     end
   end
 
