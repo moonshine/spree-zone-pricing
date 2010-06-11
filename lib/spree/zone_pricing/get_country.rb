@@ -4,7 +4,7 @@ module Spree::ZonePricing::GetCountry
       # This method will retrieve the users country
       def get_user_country_id
         # Check if set in session
-        country = session[:country] if session.has_key?(:country)
+        country = session[:zone_pricing_country] if session.has_key?(:zone_pricing_country)
         # If no country in session, check if user has a bill address, if so use
         # the country from the address
         country ||= (current_user && current_user.respond_to?('ship_address') &&

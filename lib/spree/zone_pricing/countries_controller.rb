@@ -11,7 +11,7 @@ module Spree::ZonePricing::CountriesController
         end
         if country
           # Store country in the session
-          session[:country] = country.id
+          session[:zone_pricing_country] = country.id
           # Update prices for the current order
           if session[:order_id]
             order = Order.find(session[:order_id])

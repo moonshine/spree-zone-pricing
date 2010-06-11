@@ -36,6 +36,9 @@ class ZonePricingExtension < Spree::Extension
     OrdersController.send(:include, Spree::ZonePricing::OrdersController)
     # Add code to save zone prices
     Admin::VariantsController.send(:include, Spree::ZonePricing::Admin::VariantsController)
+    # Add code to check zone prices after address is saved during checkout, if ship
+    # country not the same change prices in order
+    CheckoutsController.send(:include, Spree::ZonePricing::CheckoutsController)
 
   end
 end
