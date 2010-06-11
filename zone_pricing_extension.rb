@@ -16,6 +16,8 @@ class ZonePricingExtension < Spree::Extension
 
     # Add helper to retrieve the users country
     ApplicationHelper.send(:include, Spree::ZonePricing::GetCountry)
+    # Add helper to retrieve the users country, used by a number of controllers
+    Spree::BaseController.send(:include, Spree::ZonePricing::GetCountry)
 
     # Add additional associations to allow m:m relationship
     # between zones<->variants
@@ -32,10 +34,6 @@ class ZonePricingExtension < Spree::Extension
     CountriesController.send(:include, Spree::ZonePricing::CountriesController)
     # Add code to set the currently country in the order
     OrdersController.send(:include, Spree::ZonePricing::OrdersController)
-    # Add helper to retrieve the users country
-    OrdersController.send(:include, Spree::ZonePricing::GetCountry)
-    # Add helper to retrieve the users country
-    Admin::VariantsController.send(:include, Spree::ZonePricing::GetCountry)
     # Add code to save zone prices
     Admin::VariantsController.send(:include, Spree::ZonePricing::Admin::VariantsController)
 

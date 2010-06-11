@@ -12,6 +12,11 @@ module Spree::ZonePricing::CountriesController
         if country
           # Store country in the session
           session[:country] = country.id
+          # Update prices for the current order
+          if session[:order_id]
+            order = Order.find(session[:order_id])
+            order.update_zone_prices(get_user_country_id)
+          end
           flash[:notice] = t("country_changed")
         else
           flash[:error] = t("country_not_changed")

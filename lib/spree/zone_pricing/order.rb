@@ -6,10 +6,22 @@ module Spree::ZonePricing::Order
       alias :spree_add_variant :add_variant unless method_defined?(:spree_add_variant)
       alias :add_variant :site_add_variant
 
+      # Method to update prices in the current order when country changes
+      def update_zone_prices(country_id); order_update_zone_prices(country_id); end
+
       # We need to know what the currently selected country is so that we can
       # determine the zone price
       attr_accessor :country_id
     end
+  end
+
+  private
+
+  # Update price of line items in current order on change
+  # of country
+  def order_update_zone_prices(country_id)
+    self.line_items.each {|li| li.update_attribute(:price, li.variant.zone_price(country_id))}
+    update_totals!
   end
 
   # Override the add_variant functionality so that we can adjust the price based on
