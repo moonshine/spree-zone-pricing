@@ -21,7 +21,7 @@ the "Ship To" address. Prices of items in the cart will be changed to reflect th
 
 ### Run migration
 
-Run the DB migration to add the new table to store the prices for each zone and product variant.
+Run the DB migration to add a new table to store the prices for each zone and product variant.
 
 ### Set the default country
 
