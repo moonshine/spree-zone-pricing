@@ -6,8 +6,6 @@ module Spree::ZonePricing::OrdersController
     end
   end
 
-  private
-
   # The order object needs to know which country has been selected
   # by the user so that we can calculate the zone prices. This informations
   # may be stored in the session which we do not have access to in the model

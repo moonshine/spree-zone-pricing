@@ -6,8 +6,6 @@ module Spree::ZonePricing::ProductsHelper
     end
   end
 
-  private
-
   # returns the price of the product to show for display purposes
   def site_product_price(product_or_variant, options={})
     options.assert_valid_keys(:format_as_currency, :show_vat_text)

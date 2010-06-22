@@ -15,15 +15,6 @@ module Spree::ZonePricing::Order
     end
   end
 
-  private
-
-  # Update price of line items in current order on change
-  # of country
-  def order_update_zone_prices(country_id)
-    self.line_items.each {|li| li.update_attribute(:price, li.variant.zone_price(country_id))}
-    update_totals!
-  end
-
   # Override the add_variant functionality so that we can adjust the price based on
   # the country and therefore zone selected
   def site_add_variant(variant, quantity=1)
@@ -61,5 +52,14 @@ module Spree::ZonePricing::Order
     end
 
     current_item
+  end
+
+  private
+
+  # Update price of line items in current order on change
+  # of country
+  def order_update_zone_prices(country_id)
+    self.line_items.each {|li| li.update_attribute(:price, li.variant.zone_price(country_id))}
+    update_totals!
   end
 end
